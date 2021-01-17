@@ -1,100 +1,140 @@
-const { DateTime } = require("luxon");
-const fs = require("fs");
-const pluginRss = require("@11ty/eleventy-plugin-rss");
-const pluginSyntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
-const pluginNavigation = require("@11ty/eleventy-navigation");
-const markdownIt = require("markdown-it");
-const markdownItAnchor = require("markdown-it-anchor");
+const syntaxHighlightPlugin = require('@11ty/eleventy-plugin-syntaxhighlight')
+const htmlMinTransform = require('./utils/transforms/htmlmin.js')
+const contentParser = require('./utils/transforms/contentParser.js')
+const htmlDate = require('./utils/filters/htmlDate.js')
+const rssPlugin = require('@11ty/eleventy-plugin-rss')
+const pwaPlugin = require('eleventy-plugin-pwa')
+const date = require('./utils/filters/date.js')
+const fs = require('fs')
 
-module.exports = function(eleventyConfig) {
-  eleventyConfig.addPlugin(pluginRss);
-  eleventyConfig.addPlugin(pluginSyntaxHighlight);
-  eleventyConfig.addPlugin(pluginNavigation);
+/**
+ * Import site configuration
+ */
+const siteConfig = require('./src/_data/config.json')
 
-  eleventyConfig.setDataDeepMerge(true);
+module.exports = function (eleventyConfig) {
+  /**
+   * Add custom watch targets
+   *
+   * @link https://www.11ty.dev/docs/config/#add-your-own-watch-targets
+   */
+  eleventyConfig.addWatchTarget('./bundle/')
 
-  eleventyConfig.addLayoutAlias("post", "layouts/post.njk");
+  /**
+   * Passthrough file copy
+   *
+   * @link https://www.11ty.io/docs/copy/
+   */
+  eleventyConfig.addPassthroughCopy({
+    './static': '.'
+  })
+  eleventyConfig.addPassthroughCopy(`./src/assets/css/${siteConfig.syntaxTheme}`)
+  eleventyConfig.addPassthroughCopy({
+    bundle: 'assets'
+  })
 
-  eleventyConfig.addFilter("readableDate", dateObj => {
-    return DateTime.fromJSDate(dateObj, {zone: 'utc'}).toFormat("dd LLL yyyy");
-  });
+  /**
+   * Add filters
+   *
+   * @link https://www.11ty.io/docs/filters/
+   */
+  // human friendly date format
+  eleventyConfig.addFilter('dateFilter', date)
+  // robot friendly date format for crawlers
+  eleventyConfig.addFilter('htmlDate', htmlDate)
 
-  // https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#valid-date-string
-  eleventyConfig.addFilter('htmlDateString', (dateObj) => {
-    return DateTime.fromJSDate(dateObj, {zone: 'utc'}).toFormat('yyyy-LL-dd');
-  });
+  /**
+   * Add Transforms
+   *
+   * @link https://www.11ty.io/docs/config/#transforms
+   */
+  if (process.env.ELEVENTY_ENV === 'production') {
+    // Minify HTML when building for production
+    eleventyConfig.addTransform('htmlmin', htmlMinTransform)
+  }
+  // Parse the page HTML content and perform some manipulation
+  eleventyConfig.addTransform('contentParser', contentParser)
 
-  // Get the first `n` elements of a collection.
-  eleventyConfig.addFilter("head", (array, n) => {
-    if( n < 0 ) {
-      return array.slice(n);
-    }
+  /**
+   * Add Plugins
+   * @link https://github.com/11ty/eleventy-plugin-rss
+   * @link https://github.com/11ty/eleventy-plugin-syntaxhighlight
+   * @link https://github.com/okitavera/eleventy-plugin-pwa
+   */
+  eleventyConfig.addPlugin(rssPlugin)
+  eleventyConfig.addPlugin(syntaxHighlightPlugin)
+  eleventyConfig.addPlugin(pwaPlugin)
 
-    return array.slice(0, n);
-  });
+  /**
+   * Create custom data collections
+   * for blog and feed
+   * Code from https://github.com/hankchizljaw/hylia
+   */
+  // Blog posts collection
+  const now = new Date()
+  const livePosts = post => post.date <= now && !post.data.draft
+  eleventyConfig.addCollection('posts', collection => {
+    return [
+      ...collection
+      .getFilteredByGlob(
+        `./${siteConfig.paths.src}/${siteConfig.paths.blogdir}/**/*`
+      )
+      .filter(livePosts),
+    ]
+  })
 
-  eleventyConfig.addCollection("tagList", require("./_11ty/getTagList"));
-
-  eleventyConfig.addPassthroughCopy("img");
-  eleventyConfig.addPassthroughCopy("css");
-
-  /* Markdown Overrides */
-  let markdownLibrary = markdownIt({
-    html: true,
-    breaks: true,
-    linkify: true
-  }).use(markdownItAnchor, {
-    permalink: true,
-    permalinkClass: "direct-link",
-    permalinkSymbol: "#"
-  });
-  eleventyConfig.setLibrary("md", markdownLibrary);
-
-  // Browsersync Overrides
+  /**
+   * Override BrowserSync Server options
+   *
+   * @link https://www.11ty.dev/docs/config/#override-browsersync-server-options
+   */
   eleventyConfig.setBrowserSyncConfig({
-    callbacks: {
-      ready: function(err, browserSync) {
-        const content_404 = fs.readFileSync('_site/404.html');
-
-        browserSync.addMiddleware("*", (req, res) => {
-          // Provides the 404 content without redirect.
-          res.write(content_404);
-          res.end();
-        });
+    notify: false,
+    open: true,
+    snippetOptions: {
+      rule: {
+        match: /<\/head>/i,
+        fn: function (snippet, match) {
+          return snippet + match
+        },
       },
     },
-    ui: false,
-    ghostMode: false
-  });
+    // Set local server 404 fallback
+    callbacks: {
+      ready: function (err, browserSync) {
+        const content_404 = fs.readFileSync('dist/404.html')
 
+        browserSync.addMiddleware('*', (req, res) => {
+          // Provides the 404 content without redirect.
+          res.writeHead(404, {
+            'Content-Type': 'text/html'
+          });
+          res.write(content_404)
+          res.end()
+        })
+      },
+    },
+  })
+
+  /*
+   * Disable use gitignore for avoiding ignoring of /bundle folder during watch
+   * https://www.11ty.dev/docs/ignores/#opt-out-of-using-.gitignore
+   */
+  eleventyConfig.setUseGitIgnore(false);
+
+  /**
+   * Eleventy configuration object
+   */
   return {
-    templateFormats: [
-      "md",
-      "njk",
-      "html",
-      "liquid"
-    ],
-
-    // If your site lives in a different subdirectory, change this.
-    // Leading or trailing slashes are all normalized away, so don’t worry about those.
-
-    // If you don’t have a subdirectory, use "" or "/" (they do the same thing)
-    // This is only used for link URLs (it does not affect your file structure)
-    // Best paired with the `url` filter: https://www.11ty.dev/docs/filters/url/
-
-    // You can also pass this in on the command line using `--pathprefix`
-    // pathPrefix: "/",
-
-    markdownTemplateEngine: "liquid",
-    htmlTemplateEngine: "njk",
-    dataTemplateEngine: "njk",
-
-    // These are all optional, defaults are shown:
     dir: {
-      input: ".",
-      includes: "_includes",
-      data: "_data",
-      output: "_site"
-    }
-  };
-};
+      input: siteConfig.paths.src,
+      includes: siteConfig.paths.includes,
+      layouts: `${siteConfig.paths.includes}/layouts`,
+      output: siteConfig.paths.output,
+    },
+    passthroughFileCopy: true,
+    templateFormats: ['njk', 'md'],
+    htmlTemplateEngine: 'njk',
+    markdownTemplateEngine: 'njk',
+  }
+}
