@@ -8,7 +8,7 @@ templateEngineOverride: njk,md
 
 ---
 
-## Последние статьи
+## Последние записи
 
 {% for item in collections.posts.reverse().slice(0, 5) %}
 - [{{ item.data.title }}]({{ item.url }})

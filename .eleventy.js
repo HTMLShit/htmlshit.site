@@ -3,7 +3,6 @@ const htmlMinTransform = require('./utils/transforms/htmlmin.js')
 const contentParser = require('./utils/transforms/contentParser.js')
 const htmlDate = require('./utils/filters/htmlDate.js')
 const rssPlugin = require('@11ty/eleventy-plugin-rss')
-const pwaPlugin = require('eleventy-plugin-pwa')
 const date = require('./utils/filters/date.js')
 const fs = require('fs')
 
@@ -61,11 +60,9 @@ module.exports = function (eleventyConfig) {
    * Add Plugins
    * @link https://github.com/11ty/eleventy-plugin-rss
    * @link https://github.com/11ty/eleventy-plugin-syntaxhighlight
-   * @link https://github.com/okitavera/eleventy-plugin-pwa
    */
   eleventyConfig.addPlugin(rssPlugin)
   eleventyConfig.addPlugin(syntaxHighlightPlugin)
-  eleventyConfig.addPlugin(pwaPlugin)
 
   /**
    * Create custom data collections
