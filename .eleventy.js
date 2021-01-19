@@ -26,11 +26,13 @@ module.exports = function (eleventyConfig) {
    * @link https://www.11ty.io/docs/copy/
    */
   eleventyConfig.addPassthroughCopy({
-    './static': '.'
+    './static': '.',
   })
-  eleventyConfig.addPassthroughCopy(`./src/assets/css/${siteConfig.syntaxTheme}`)
+  eleventyConfig.addPassthroughCopy(
+    `./src/assets/css/${siteConfig.syntaxTheme}`
+  )
   eleventyConfig.addPassthroughCopy({
-    bundle: 'assets'
+    bundle: 'assets',
   })
 
   /**
@@ -72,14 +74,14 @@ module.exports = function (eleventyConfig) {
    */
   // Blog posts collection
   const now = new Date()
-  const livePosts = post => post.date <= now && !post.data.draft
-  eleventyConfig.addCollection('posts', collection => {
+  const livePosts = (post) => post.date <= now && !post.data.draft
+  eleventyConfig.addCollection('posts', (collection) => {
     return [
       ...collection
-      .getFilteredByGlob(
-        `./${siteConfig.paths.src}/${siteConfig.paths.blogdir}/**/*`
-      )
-      .filter(livePosts),
+        .getFilteredByGlob(
+          `./${siteConfig.paths.src}/${siteConfig.paths.blogdir}/**/*`
+        )
+        .filter(livePosts),
     ]
   })
 
@@ -107,8 +109,8 @@ module.exports = function (eleventyConfig) {
         browserSync.addMiddleware('*', (req, res) => {
           // Provides the 404 content without redirect.
           res.writeHead(404, {
-            'Content-Type': 'text/html'
-          });
+            'Content-Type': 'text/html',
+          })
           res.write(content_404)
           res.end()
         })
@@ -120,7 +122,7 @@ module.exports = function (eleventyConfig) {
    * Disable use gitignore for avoiding ignoring of /bundle folder during watch
    * https://www.11ty.dev/docs/ignores/#opt-out-of-using-.gitignore
    */
-  eleventyConfig.setUseGitIgnore(false);
+  eleventyConfig.setUseGitIgnore(false)
 
   /**
    * Eleventy configuration object

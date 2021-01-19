@@ -2,18 +2,20 @@
   {% if navigation.items %}
     <nav>
       {% for item in navigation.items %}
-        {% set relExternal = '' %}
-        {% set isCurrent = '' %}
+        {% if not item.hidden %}
+          {% set relExternal = '' %}
+          {% set isCurrent = '' %}
 
-        {% if item.external %}
-          {% set relExternal = ' rel="external" target="_blank"' %}
+          {% if item.external %}
+            {% set relExternal = ' rel="external" target="_blank"' %}
+          {% endif %}
+          {% if page.url == item.url %}
+            {% set isCurrent = ' aria-current="page"' %}
+          {% endif %}
+          <a href="{{ item.url }}"{{ relExternal | safe }}{{ isCurrent | safe }}>
+            <b>{{ item.text }}</b>
+          </a>
         {% endif %}
-        {% if page.url == item.url %}
-          {% set isCurrent = ' aria-current="page"' %}
-        {% endif %}
-        <a href="{{ item.url }}"{{ relExternal | safe }}{{ isCurrent | safe }}>
-          <b>{{ item.text }}</b>
-        </a>
       {% endfor %}
     </nav>
   {% endif %}

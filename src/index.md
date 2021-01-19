@@ -1,13 +1,13 @@
 ---
 layout: 'home'
-title: XITY Starter
+title: Будни верстальщика
 ---
 
-**XITY** (roman version of 11ty) is a basic starter blog/site built on top of Eleventy. You will find just some basic tools to start your project, no frameworks, no extra css and html, nothing to clean. **Just start from here**.
+[Канал](https://t.me/htmlshit) про HTML, CSS и фронтенд вообще. Шпаргалки, ссылки, разбор багов и авторские статьи. Начинался как набор забавных и странных ситуаций из мира аутсорса, но со временем развился в альманах веб-разработки.
 
 ---
 
-## Key features
+## Последние статьи
 
 - Integrated RSS Feed.
 - [PostCSS](https://postcss.org) with [Preset Env](https://preset-env.cssdb.org) and [CSSNano](https://cssnano.co) to enhance and clean your css.
@@ -23,8 +23,12 @@ title: XITY Starter
 
 ---
 
-## What’s next?
+## Что дальше?
 
-- <del>Posts pagination</del><ins><b>done</b></ins>
-- <del>Tags and tags collections</del><ins><b>done</b></ins>
-- <del>Service Worker</del><ins><b>done</b></ins>
+Работы над отдельным сайтом для проекта только начались, потому многое в планах.
+
+- Дизайн
+- Обратная постраничная навигация в блоге
+- Режим быстрого просмотра для Telegram, Firefox и Safari
+- Интерактив
+- Примеры кода

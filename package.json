@@ -1,13 +1,13 @@
 {
-  "name": "xity-starter",
-  "version": "1.2.0",
+  "name": "htmlshit.site",
+  "version": "0.0.1",
   "private": true,
-  "description": "A blog-ready 11ty starter based on PostCSS and Parcel, with a RSS feed and Native Elements.",
-  "author": "Mattia Astorino",
+  "description": "HTMLShit channel website.",
+  "author": "Sergey Bekharsky",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/equinusocio/xity-starter"
+    "url": "https://github.com/HTMLShit/htmlshit.site"
   },
   "scripts": {
     "clean": "run-s clean:* && ",
