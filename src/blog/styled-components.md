@@ -14,3 +14,5 @@ CSS-in-JS
 Styled Components
 
 styled(Component)
+
+https://medium.com/swlh/creating-react-styled-components-with-dynamic-tags-and-props-ef965c839e64
