@@ -1,4 +1,5 @@
 ---
+draft: true
 title: Чистим CSS
 date: '2021-01-24'
 tags:

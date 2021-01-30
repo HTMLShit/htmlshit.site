@@ -19,6 +19,7 @@ templateEngineOverride: njk,md
 ## Что дальше?
 
 - Дизайн
+- О переезде на Eleventy
 - Обратная постраничная навигация в блоге
 - Режим быстрого просмотра для Telegram, Firefox и Safari
 - Интерактив
