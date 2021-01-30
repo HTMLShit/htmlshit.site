@@ -217,10 +217,10 @@ function HelloVarComponent() {
   return (
     <article>
       {colors.map((color) => {
-        const style = {"--color": color};
+        const colorStyle = {"--color": color};
 
         return (
-          <div className="hello" style={style}>
+          <div className="hello" style={colorStyle}>
             Hello Custom Properties!
           </div>
         );
