@@ -3,12 +3,13 @@
 
 # caches
 .cache
-.parcel-cache
+.snowpack
 
 # output
 /dist
-/hylia
 /bundle
+/build
+/_output
 
 # Created by https://www.gitignore.io/api/node,macos,windows
 # Edit at https://www.gitignore.io/?templates=node,macos,windows

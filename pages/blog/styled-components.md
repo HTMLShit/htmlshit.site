@@ -82,7 +82,9 @@ el.style.backgroundColor = 'cyan';
 В итоге мы получаем генерированный атрибут style, который ещё называют инлайновыми стилями:
 
 ```html
-<div style="color: white; background-color: red">Hello Styles!</div>
+<div style="color: white; background-color: red">
+  Hello Styles!
+</div>
 ```
 
 Минусы? Никаких вам псевдоклассов, никаких вам псевдоэлементов, никакой развитой анимации. Об отсутствии централизованного управления внешним видом множества элементов единовременно и объединения стилей (кажется, это худшая в мире ода CSS-классам). И с браузерным префиксами множество не относящихся к делу нюансов. Плюсы? Это бронебойно и точно работает (пока кто-нибудь !important не наставил).
@@ -98,7 +100,11 @@ const divStyle = {
 }
 
 function HelloStylesComponent() {
-  return <div style={divStyle}>Hello Styles!</div>
+  return (
+    <div style={divStyle}>
+      Hello React Styles!
+    </div>
+  );
 }
 ```
 
@@ -143,9 +149,15 @@ WIP ПРИМЕРЫ БИБЛИОТЕК
 }
 ```
 
+И сам компонент:
+
 ```jsx
 function HelloClassNameComponent() {
-  return <div className="hello">Hello Class Name!</div>
+  return (
+    <div className="hello">
+      Hello Class Name!
+    </div>
+  );
 }
 ```
 
@@ -164,7 +176,11 @@ const Div = styled.div`
 `;
 
 function HelloStyledComponent() {
-  return <Div>Hello Styled!</Div>
+  return (
+    <Div>
+      Hello Styled!
+    </Div>
+  );
 }
 ```
 
@@ -189,7 +205,11 @@ const Div = styled.div`
 `;
 
 function HelloStyledComponent() {
-  return <Div color="green">Hello Styled!</Div>
+  return (
+    <Div color="green">
+      Hello Styled!
+    </Div>
+  );
 }
 ```
 
@@ -263,6 +283,8 @@ function HelloClassComponent() {
 }
 ```
 
+И изменим это свойство в нужный нам момент:
+
 ```jsx
 const colors = ['red', 'green', 'blue'];
 
@@ -311,7 +333,11 @@ const Div = styled.div`
 `;
 
 function HelloCssComponent() {
-  return <Div isAlt color="green">Hello Styled!</Div>
+  return (
+    <Div isAlt color="green">
+      Hello Styled!
+    </Div>
+  );
 }
 ```
 
@@ -384,7 +410,11 @@ const WobbledDiv = styled.div`
 `;
 
 function HelloAnimatedComponent() {
-  return <WobbleDiv animationLength="0.8s">Hello Wobble!</WobbleDiv>
+  return (
+    <WobbleDiv animationLength="0.8s">
+      Hello Wobble!
+    </WobbleDiv>
+  );
 }
 ```
 
@@ -432,7 +462,11 @@ const Div = styled.div`
 `;
 
 function HelloMediaComponent() {
-  return <Div>Hello Media!</Div>
+  return (
+    <Div>
+      Hello Media!
+    </Div>
+  );
 }
 ```
 
@@ -534,11 +568,13 @@ render(
 );
 ```
 
+### Typescript
 
+ТИПИЗАЦИЯ
 
-https://medium.com/swlh/creating-react-styled-components-with-dynamic-tags-and-props-ef965c839e64
+## Использованные материалы
 
-https://www.reddit.com/r/reactjs/comments/l4o5k5/the_styledcomponents_happy_path/?%24deep_link=true&correlation_id=51dbefb7-8915-41e7-be36-2de0bfe9e30c&ref=email_digest&ref_campaign=email_digest&ref_source=email&%243p=e_as&%24original_url=https%3A%2F%2Fwww.reddit.com%2Fr%2Freactjs%2Fcomments%2Fl4o5k5%2Fthe_styledcomponents_happy_path%2F%3F%24deep_link%3Dtrue%26correlation_id%3D51dbefb7-8915-41e7-be36-2de0bfe9e30c%26ref%3Demail_digest%26ref_campaign%3Demail_digest%26ref_source%3Demail&_branch_match_id=745291558627751109
-
-https://www.joshwcomeau.com/css/styled-components/
-https://jsramblings.com/how-to-use-media-queries-with-styled-components/
+- https://medium.com/swlh/creating-react-styled-components-with-dynamic-tags-and-props-ef965c839e64
+- https://www.reddit.com/r/reactjs/comments/l4o5k5/the_styledcomponents_happy_path/
+- https://www.joshwcomeau.com/css/styled-components/
+- https://jsramblings.com/how-to-use-media-queries-with-styled-components/

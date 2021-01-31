@@ -1,7 +1,7 @@
 const jsdom = require('@tbranyen/jsdom')
 const { JSDOM } = jsdom
 const slugify = require('slugify')
-const eleventyConfig = require('../../src/_data/config.json')
+const eleventyConfig = require('../../xity.config.js')
 
 function setClass(element, list) {
   list.map((item) => element.classList.add(item))
@@ -64,7 +64,7 @@ module.exports = function (value, outputPath) {
      */
     const articleHeadings = [
       ...document.querySelectorAll(
-        'article h2, article h3, article h4, article h5, article h6'
+        'article h2, article h3, article h4, article h5, article h6',
       ),
     ]
     if (articleHeadings.length) {
@@ -133,7 +133,7 @@ module.exports = function (value, outputPath) {
           for (let i = linkAttributes.length; i--; ) {
             externalLink.setAttribute(
               linkAttributes[i].name,
-              linkAttributes[i].value
+              linkAttributes[i].value,
             )
           }
         }
@@ -154,9 +154,9 @@ module.exports = function (value, outputPath) {
                   .filter((relValStr) => relValStr.trim())
                   .map((relValStr) => relValStr.toLowerCase())
                   .concat(['noopener', 'noreferrer'])
-                  .sort()
+                  .sort(),
               ),
-            ].join(' ')
+            ].join(' '),
           )
         }
         externalLink.innerHTML = link.innerHTML

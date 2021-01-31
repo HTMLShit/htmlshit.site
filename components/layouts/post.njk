@@ -4,18 +4,21 @@
 {# Populate <head> with post-related assets #}
 {% block head %}
   {% if config.syntaxTheme %}
-    <link rel="preload" as="style" href="/assets/css/{{ config.syntaxTheme }}"/>
-    <link rel="stylesheet" href="/assets/css/{{ config.syntaxTheme }}"/>
+    <link rel="preload" as="style" href="/static/css/{{ config.syntaxTheme }}"/>
+    <link rel="stylesheet" href="/static/css/{{ config.syntaxTheme }}"/>
   {% endif %}
 {% endblock %}
 
 {% block content %}
-  <main tabindex="-1" style="--ne-vertical-leading: 3rem">
+  <main tabindex="-1">
     {% include "header.njk" %}
+
     {% if date %}
       <small><time datetime="{{ date | htmlDate }}">{{ date | dateFilter }}</time></small>
     {% endif %}
+
     <h1>{{ title }}</h1>
+
     {% if tags.length %}
       <ul style="all: unset; display: inline-flex; list-style: none;">
       {% for tag in tags %}
@@ -23,11 +26,15 @@
       {% endfor %}
       </ul>
     {% endif %}
+
     <hr />
-    <article>
+
+    <article ne-prose>
       {{ content | safe }}
     </article>
+
     <hr />
+
     {% set previousPost = collections.posts | getPreviousCollectionItem(page) %}
     {% set nextPost = collections.posts | getNextCollectionItem(page) %}
     {{ postNavigation(previousPost, nextPost) }}

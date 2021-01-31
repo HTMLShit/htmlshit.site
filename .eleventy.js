@@ -3,22 +3,30 @@ const htmlMinTransform = require('./utils/transforms/htmlmin.js')
 const contentParser = require('./utils/transforms/contentParser.js')
 const htmlDate = require('./utils/filters/htmlDate.js')
 const rssPlugin = require('@11ty/eleventy-plugin-rss')
+const pwaPlugin = require('eleventy-plugin-pwa')
 const date = require('./utils/filters/date.js')
-const fs = require('fs')
 
 /**
- * Import site configuration
+ * Define Eleventy custom paths
  */
-const siteConfig = require('./src/_data/config.json')
+const PATHS = {
+  // => /pages
+  input: 'pages',
+  // => /components
+  includes: '../components',
+  // => /components/layouts
+  layouts: `../components/layouts`,
+  // => /data
+  data: '../data',
+  // => /_output
+  output: '_output',
+  // => /[PATH.INPUT]/blog
+  blog: 'blog',
+  // => /static
+  static: 'static'
+}
 
 module.exports = function (eleventyConfig) {
-  /**
-   * Add custom watch targets
-   *
-   * @link https://www.11ty.dev/docs/config/#add-your-own-watch-targets
-   */
-  eleventyConfig.addWatchTarget('./bundle/')
-
   /**
    * Passthrough file copy
    *
@@ -27,13 +35,6 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({
     './static': '.',
   })
-  eleventyConfig.addPassthroughCopy(
-    `./src/assets/css/${siteConfig.syntaxTheme}`
-  )
-  eleventyConfig.addPassthroughCopy({
-    bundle: 'assets',
-  })
-
   /**
    * Add filters
    *
@@ -60,9 +61,11 @@ module.exports = function (eleventyConfig) {
    * Add Plugins
    * @link https://github.com/11ty/eleventy-plugin-rss
    * @link https://github.com/11ty/eleventy-plugin-syntaxhighlight
+   * @link https://github.com/okitavera/eleventy-plugin-pwa
    */
   eleventyConfig.addPlugin(rssPlugin)
   eleventyConfig.addPlugin(syntaxHighlightPlugin)
+  eleventyConfig.addPlugin(pwaPlugin)
 
   /**
    * Create custom data collections
@@ -74,45 +77,8 @@ module.exports = function (eleventyConfig) {
   const livePosts = (post) => post.date <= now && !post.data.draft
   eleventyConfig.addCollection('posts', (collection) => {
     return [
-      ...collection
-        .getFilteredByGlob(
-          `./${siteConfig.paths.src}/${siteConfig.paths.blogdir}/**/*`
-        )
-        .filter(livePosts),
+      ...collection.getFilteredByGlob(`./${PATHS.input}/${PATHS.blog}/**/*`).filter(livePosts),
     ]
-  })
-
-  /**
-   * Override BrowserSync Server options
-   *
-   * @link https://www.11ty.dev/docs/config/#override-browsersync-server-options
-   */
-  eleventyConfig.setBrowserSyncConfig({
-    notify: false,
-    open: true,
-    snippetOptions: {
-      rule: {
-        match: /<\/head>/i,
-        fn: function (snippet, match) {
-          return snippet + match
-        },
-      },
-    },
-    // Set local server 404 fallback
-    callbacks: {
-      ready: function (err, browserSync) {
-        const content_404 = fs.readFileSync('dist/404.html')
-
-        browserSync.addMiddleware('*', (req, res) => {
-          // Provides the 404 content without redirect.
-          res.writeHead(404, {
-            'Content-Type': 'text/html',
-          })
-          res.write(content_404)
-          res.end()
-        })
-      },
-    },
   })
 
   /*
@@ -126,14 +92,19 @@ module.exports = function (eleventyConfig) {
    */
   return {
     dir: {
-      input: siteConfig.paths.src,
-      includes: siteConfig.paths.includes,
-      layouts: `${siteConfig.paths.includes}/layouts`,
-      output: siteConfig.paths.output,
+      input: PATHS.input,
+      includes: PATHS.includes,
+      layouts: PATHS.layouts,
+      data: PATHS.data,
+      output: PATHS.output,
     },
-    passthroughFileCopy: true,
-    templateFormats: ['njk', 'md'],
     htmlTemplateEngine: 'njk',
     markdownTemplateEngine: 'njk',
+    templateFormats: [
+      // Templates:
+      'md', 'njk', 'html',
+      // Static Assets:
+      'css', 'jpeg', 'jpg', 'png', 'webp', 'avif', 'svg', 'woff', 'woff2',
+    ],
   }
 }
