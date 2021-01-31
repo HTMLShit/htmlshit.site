@@ -11,7 +11,7 @@ module.exports = {
     [
       '@snowpack/plugin-run-script',
       { cmd: 'eleventy', watch: '$1 --watch --quiet' },
-    ]
+    ],
   ],
   routes: [
     /* https://www.snowpack.dev/guides/routing#nav-primary
@@ -33,6 +33,7 @@ module.exports = {
   devOptions: {
     // Eleventy updates multiple files at once, so add a 300ms delay before we trigger a browser update
     hmrDelay: 300,
+    port: 3000,
   },
   buildOptions: {
     /* https://www.snowpack.dev/reference/configuration#buildoptions */
