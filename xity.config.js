@@ -2,17 +2,16 @@ module.exports = {
   /**
    * Site data
    */
-  name: 'XITY - Eleventy blog/site starter',
+  name: '@htmlshit',
   shortDesc:
-    "I'm Mattia Astorino, UX Engineer in Milan and member of Open Source Design.",
-  url: 'https://xity-starter.netlify.app',
-  lang: 'en',
+    'Будни верстальщика: канал о вёрстке, фронтенде и веб-разработке вообще',
+  url: 'https://t.me/htmlshit',
+  lang: 'ru',
   /**
    * Socials and monetisation
    */
-  authorHandle: '@equinusocio',
-  authorName: 'Mattia Astorino',
-  paymentPointer: '$ilp.uphold.com/9ebKEYaNiGUf',
+  authorHandle: '@bekharsky',
+  authorName: 'Sergey Bekharsky',
   /**
    * Content settings
    */
