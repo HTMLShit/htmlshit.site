@@ -17,6 +17,57 @@ tags:
 
 Шучу. Продолжаем.
 
+## TLDR
+
+```jsx
+const sharedText = css`
+  color: white;
+  margin: 1rem;
+`;
+
+const Title = styled.h1`
+  ${sharedText};
+  font-size: 2rem;
+`;
+
+const Text= styled.p`
+  ${sharedText};
+  font-size: 1rem;
+`;
+
+const TextBase = styled.p`
+  font-size: 1rem;
+  text-align: center;
+`;
+
+const BlueText = styled(TextBase)`
+  font-color: blue;
+`;
+
+const PinkText = styled(TextBase)`
+    font-color: pink;
+`;
+
+const Container = styled.div`
+   margin: ${props => props.large ? '5rem' : '1rem'};
+`;
+
+const TextBase = styled.p`
+   font-size: 1rem;
+   text-align: center;
+   font-color: ${props => props.color};
+`;
+
+const MyComponent = function() {
+  return (
+    <Container large={true}>
+      <TextBase color={'#0000FF'}>I'm Blue</TextBase>
+      <TextBase color={'pink'}>I'm Pink</TextBase>
+    </Container>
+  );
+}
+```
+
 ## CSS-in-JS
 
 ### Атрибут style
@@ -73,13 +124,13 @@ function HelloStylesComponent() {
 
 ### Что в наличии?
 
-ПРИМЕРЫ БИБЛИОТЕК
+WIP ПРИМЕРЫ БИБЛИОТЕК
 
-Как видим, существует множество CSS-in-JS фреймворков и библиотек, но лишь одна из них, благодаря своей потрясающе простой идее, создала вокруг себя некий культ. И это – Styled Components. Вся идея, как было сказано в прологе, укладывается в названии, а число подражателей и последователей – весьма велико. Давайте просто попробуем.
+Как видим, существует множество CSS-in-JS фреймворков и библиотек, но лишь одна из них, благодаря своей потрясающе простой идее, создала вокруг себя некий культ. И это – Styled Components. Вся идея, как было сказано в прологе, укладывается в названии, а число подражателей и последователей – весьма велико: Emotion, astroturf, linaria ССЫЛКИ. Давайте просто попробуем.
 
 ## Styled Components
 
-Возьмём пример выше и превратим в классический React-компонент, для упрощения процесса я буду использовать SCSS:
+Возьмём пример выше и превратим в классический React-компонент, для упрощения процесса я буду использовать SCSS (ведь все его любят):
 
 ```scss
 .hello {
@@ -98,7 +149,7 @@ function HelloClassNameComponent() {
 }
 ```
 
-А теперь то же самое, но при помощи Styled Components (далее – SC):
+А теперь то же самое, но при помощи Styled Components (иногда далее – SC):
 
 ```jsx
 import styled from 'styled-components';
@@ -118,6 +169,8 @@ function HelloStyledComponent() {
 ```
 
 <small>Сразу видна проблема с подсветкой кода, но это уже по моей вине: я пока не очень разобрался с настройками [Prism](https://prismjs.com/) в [Eleventy](https://www.11ty.dev/). Просто имейте это в виду.</small>
+
+Выглядит весьма похоже, не правда ли? Используя не так давно появившиеся фишки языка под названием [шаблонные строки](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/template_strings) и [теговые шаблоны](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/template_strings#%D1%82%D0%B5%D0%B3%D0%BE%D0%B2%D1%8B%D0%B5_%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD%D1%8B) Styled Components буквально позволяет писать привычный CSS прямо в JS-модулях и таким образом теперь ваш компонент целиком и полностью отвечает не только за свою структуру и визуальную логику, но и за внешнее оформление тоже (в разумных рамках, конечно). И привычный и такой любимый родительский селектор (&, амперсанд) имеется, ниже рассмотрим.
 
 ### Прокидываем props'ы
 
@@ -262,9 +315,26 @@ function HelloCssComponent() {
 }
 ```
 
-Мы не только получили независимый переиспользуемый блок стилей, но и вынесли описание представления за пределы минимальной, но всё же логики блока. И таких комбинаций свойств и стилей может быть множество даже в пределах одного элемента.
+Мы не только получили независимый переиспользуемый блок стилей, но и вынесли описание представления за пределы минимальной, но всё же логики блока. И таких комбинаций свойств и стилей может быть множество даже в пределах одного элемента. А ещё можно и просто вот так:
 
-Конструкция, кстати, называется [теговым шаблоном (taggeg template)](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/template_strings#%D1%82%D0%B5%D0%B3%D0%BE%D0%B2%D1%8B%D0%B5_%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD%D1%8B) и является встроенной возможностью последних версий JavaScript под общим названием ESNext (ES6, 2015, 2019... ну и TypeScript туда же, не судите строго). Сама директива styled – тоже не что иное как фабрика этих самых теговых шаблонов. Если вы ещё не поняли, что это вам даёт, позже я покажу.
+```jsx
+const sharedText = css`
+  color: white;
+  margin: 1rem;
+`;
+
+const Title = styled.h1`
+  ${sharedText};
+  font-size: 2rem;
+`;
+
+const Text= styled.p`
+  ${sharedText};
+  font-size: 1rem;
+`;
+```
+
+Конструкция, кстати, называется теговым шаблоном, я же писал выше, что библиотека Styled Components на них основана. Сама директива styled – тоже не что иное как фабрика этих самых теговых шаблонов. Если вы ещё не поняли, что это вам даёт, позже я покажу.
 
 ### Анимации и keyframes``
 
@@ -377,20 +447,94 @@ import styled from 'styled-components';
 import icon from './icon.png';
 
 const Icon = styled.i`
+  display: block;
   width: 16px;
   height: 16px;
   background: trasnsparent url(${icon}) center/contain no-repeat;
 `;
 
-const Button = styled.button``;
+const Button = styled.button`
+  background: none;
+  border: 1px cyan solid;
+
+  ${Icon} {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+  }
+`;
+```
+
+Можете прийти в [@htmlshitchat](https://t.me/htmlshitchat) и рассказать мне про использование тега i для иконки, но суть-то не в этом. Суть в том, что мы получили такую желанную и привычную композицию классов, да ещё и в виде всеми любимой вложенности. Родительский селектор тоже работает как надо:
+
+```jsx
+import styled from 'styled-components';
+import {Menu} from ‘../Menu’;
+import {Dropdown} from ‘../Dropdown’;
+
+const Button = styled.button`
+  border: 1px solid darkgreen;
+  background: darkkhaki;
+
+  ${Menu} & {
+    border: none;
+    background: transparent;
+  }
+
+  ${Dropdown} & {
+    text-indent: -9999px;
+
+    &::after {
+      // create some arrow maybe
+    }
+}`;
+```
+
+Что произошло? Мы использовали родительский селектор (в нашем случае компонент, Button) и заставили его выглядеть иначе при использовании внутри компонентов Menu и Dropdown. Вот так вот просто.
+
+Вот только я сразу хочу предупредить, что так делают довольно редко: это нарушает принцип единственной ответственности (насколько он вообще применим для компонентов). Гораздо чаще делают следующее:
+
+```jsx
+import styled from 'styled-components';
+import Icon from '@/ui/Icon';
+
+const ButtonIcon = styled(Icon)`
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+`;
+```
+
+Да, передаём в styled ваш компонент в качестве аргумента и получаем теговый шаблон, который генерирует новый класс на основе уже существующего класса, принадлежащего стилизуемому элементу, и новых передаваемых стилей. *Магическим* образом рождается новый компонент. Мне кажется, на этом месте у самых внимательных должна щёлкнуть в голове весьма очевидная идея: "Раз Styled Components заведует классами, можно ли подмешать их к таким привычным обычным компонентам?".
+
+И ответ – да!
+
+До тех пор пока ваши компоненты могут принимать класс (className) через переданные свойства (props) – SC может собрать композицию! В таком случае я придерживаюсь именования из документации: добавляю префикс Styled к имени компонента, это позволяет избежать любых неоднозначностей и сложностей в именовании. Следующий пример взят из [документации](https://styled-components.com/docs/basics#styling-any-component) напрямую. Я вообще крайне рекомендую её прочесть, если владеете английским. Интерактивные примеры там – шик, пройдите и попробуйте.
+
+```jsx
+import styled from 'styled-components';
+
+const Link = ({ className, children }) => (
+  <a className={className}>
+    {children}
+  </a>
+);
+
+const StyledLink = styled(Link)`
+  color: palevioletred;
+  font-weight: bold;
+`;
+
+render(
+  <div>
+    <Link>Unstyled, boring Link</Link>
+    <br />
+    <StyledLink>Styled, exciting Link</StyledLink>
+  </div>
+);
 ```
 
 
-
-
-Тут начнутся различные ухищрения, собственные утилиты и библиотеки, их документирование... В общем, удачи вам в поиске хорошего архитектора. Естественно, если вы хорошо знакомы с принципами БЭМ, OOCSS и иными и способны правильно спроектировать API ваших компонентов – никто этого не запрещает.
-
-styled(Component)
 
 https://medium.com/swlh/creating-react-styled-components-with-dynamic-tags-and-props-ef965c839e64
 
