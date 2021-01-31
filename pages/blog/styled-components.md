@@ -574,7 +574,9 @@ render(
 
 ## Использованные материалы
 
-- https://medium.com/swlh/creating-react-styled-components-with-dynamic-tags-and-props-ef965c839e64
-- https://www.reddit.com/r/reactjs/comments/l4o5k5/the_styledcomponents_happy_path/
-- https://www.joshwcomeau.com/css/styled-components/
-- https://jsramblings.com/how-to-use-media-queries-with-styled-components/
+- <https://styled-components.com/>
+- <https://emotion.sh/>
+- <https://medium.com/swlh/creating-react-styled-components-with-dynamic-tags-and-props-ef965c839e64>
+- <https://www.reddit.com/r/reactjs/comments/l4o5k5/the_styledcomponents_happy_path/>
+- <https://www.joshwcomeau.com/css/styled-components/>
+- <https://jsramblings.com/how-to-use-media-queries-with-styled-components/>
