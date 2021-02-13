@@ -1,4 +1,5 @@
 ---
+draft: true
 title: Styled Components и его друзья
 date: '2021-01-31'
 tags:
