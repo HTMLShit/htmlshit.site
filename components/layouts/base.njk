@@ -19,14 +19,6 @@
     {% block content %}{% endblock content %}
     <script>
       document.documentElement.dataset.theme = localStorage.getItem('theme') || 'auto';
-
-      {% if not env.IS_DEV %}
-        if ('serviceWorker' in navigator) {
-          window.addEventListener('load', () => {
-            navigator.serviceWorker.register('/service-worker.js');
-          });
-        }
-      {% endif %}
     </script>
   </body>
 </html>
