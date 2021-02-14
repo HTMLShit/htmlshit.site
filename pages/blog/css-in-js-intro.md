@@ -374,4 +374,4 @@ CSS:
 
 ## Итого
 
-Как видим, существует множество CSS-in-JS фреймворков и библиотек, но лишь одна из них, благодаря своей потрясающе простой идее, создала вокруг себя некий культ. И это – Styled Components. Вся идея, как было сказано в прологе, укладывается в названии, а число подражателей и последователей – весьма велико: [Emotion](https://emotion.sh/){target="_blank"}, [astroturf](https://github.com/4Catalyzer/astroturf){target="_blank"}, [linaria](https://linaria.dev/){target="_blank"}. В следующей статье познакомимся со Styled Components поближе.
+Как видим, существует множество CSS-in-JS фреймворков и библиотек, но лишь одна из них, благодаря своей потрясающе простой идее, создала вокруг себя некий культ. И это – Styled Components. Вся идея укладывается в названии, а число подражателей и последователей – весьма велико: [Emotion](https://emotion.sh/){target="_blank"}, [astroturf](https://github.com/4Catalyzer/astroturf){target="_blank"}, [linaria](https://linaria.dev/){target="_blank"}. В следующей статье познакомимся со Styled Components поближе.
