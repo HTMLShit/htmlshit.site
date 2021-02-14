@@ -1,6 +1,6 @@
 ---
 title: CSS-in-JS. Начало
-date: '2021-02-15'
+date: '2021-02-14'
 tags:
   - css
   - cssinjs

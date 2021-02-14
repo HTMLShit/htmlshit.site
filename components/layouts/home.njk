@@ -7,5 +7,6 @@
       <h1>{{ title }}</h1>
     {% endif %}
     {{ content | safe }}
+    {% include "footer.njk" %}
   </main>
 {% endblock %}

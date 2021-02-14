@@ -1,5 +1,12 @@
 :root {
   --ne-global-background: #fafafa;
+  --ne-body-font-size: 18px;
+}
+
+@media (max-width: 767px) {
+  :root {
+    --ne-headings-scale: 1.15;
+  }
 }
 
 @media (prefers-color-scheme: dark) {

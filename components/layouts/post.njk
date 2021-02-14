@@ -38,6 +38,7 @@
     {% set previousPost = collections.posts | getPreviousCollectionItem(page) %}
     {% set nextPost = collections.posts | getNextCollectionItem(page) %}
     {{ postNavigation(previousPost, nextPost) }}
+    {% include "footer.njk" %}
   </main>
 {% endblock %}
 

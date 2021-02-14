@@ -40,6 +40,11 @@ nav {
   }
 }
 
+footer {
+  text-align: right;
+  margin: var(--ne-vertical-leading, 1.5em) 0 0;
+}
+
 .permalink {
   margin-left: 1rem;
 
