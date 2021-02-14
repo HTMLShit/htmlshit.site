@@ -10,6 +10,8 @@ tags:
   - emotion
 ---
 
+ПРОЧИТАТЬ https://mxstbr.blog/2016/11/styled-components-magic-explained/
+
 Итак, [Styled Components](https://www.styled-components.com/). Буквально – стилизованные компоненты. Собственно, в этом вся суть и статью можно завершать.
 
 Шучу. Продолжаем.
