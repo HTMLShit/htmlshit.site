@@ -2,5 +2,6 @@
   :root {
     --ne-global-background: #000;
     --ne-global-foreground: #8691aa;
+    --ne-code-border: transparent;
   }
 }

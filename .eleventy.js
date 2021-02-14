@@ -67,6 +67,15 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPlugin(syntaxHighlightPlugin);
   eleventyConfig.addPlugin(pwaPlugin);
 
+  const markdownIt = require('markdown-it');
+  const markdownItAttrs = require('markdown-it-attrs');
+  const options = {
+    html: true,
+  };
+  const markdownLib = markdownIt(options).use(markdownItAttrs);
+
+  eleventyConfig.setLibrary('md', markdownLib);
+
   /**
    * Create custom data collections
    * for blog and feed
