@@ -4,8 +4,10 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --ne-global-background: #000;
+    --ne-global-background: #18191a;
     --ne-global-foreground: #8691aa;
     --ne-code-border: transparent;
+    --ne-links-foreground: #ff8c00;
+    --ne-links-active-foreground: #d66a00;
   }
 }
