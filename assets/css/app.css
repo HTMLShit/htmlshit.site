@@ -1,5 +1,4 @@
-@import '/assets/css/dark.css';
-@import '/assets/css/light.css';
+@import '/assets/css/theme.css';
 
 body {
   font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier,
@@ -42,7 +41,6 @@ nav {
     margin-left: 1rem;
   }
 }
-
 
 .permalink {
   margin-left: 1rem;
