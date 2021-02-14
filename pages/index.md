@@ -10,7 +10,8 @@ templateEngineOverride: njk,md
 
 ## Последние записи
 
-{% for item in collections.posts.reverse().slice(0, 5) %}
+{% set postList = collections.posts %}
+{% for item in postList.slice(0, 2) | reverse %}
 - [{{ item.data.title }}]({{ item.url }})
 {% endfor %}
 
