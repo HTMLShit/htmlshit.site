@@ -1,5 +1,4 @@
 const syntaxHighlightPlugin = require('@11ty/eleventy-plugin-syntaxhighlight');
-const htmlMinTransform = require('./utils/transforms/htmlmin.js');
 const contentParser = require('./utils/transforms/contentParser.js');
 const htmlDate = require('./utils/filters/htmlDate.js');
 const rssPlugin = require('@11ty/eleventy-plugin-rss');
@@ -49,10 +48,6 @@ module.exports = function (eleventyConfig) {
    *
    * @link https://www.11ty.io/docs/config/#transforms
    */
-  if (process.env.ELEVENTY_ENV === 'production') {
-    // Minify HTML when building for production
-    eleventyConfig.addTransform('htmlmin', htmlMinTransform);
-  }
   // Parse the page HTML content and perform some manipulation
   eleventyConfig.addTransform('contentParser', contentParser);
 

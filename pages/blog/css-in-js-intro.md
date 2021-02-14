@@ -38,7 +38,7 @@ tags:
 <!-- script.js -->
 <script>
   const myButton = document.getElementById('myButton');
-  myButton.on('click', () => {
+  myButton.addEventListener('click', () => {
     alert('My click!');
   });
 </script>
@@ -50,7 +50,7 @@ tags:
 
 ### Компоненты
 
-Каждый компонент решает свой вопрос и решает его хорошо: кнопка по нажатию просто делает, что указано, поле ввода на форме – реагирует на ошибки пользователя, а модальное окно – способно само определить, на каком устройстве оно было открыто. Ответственность разделена? [Вполне](https://speakerdeck.com/didoo/let-there-be-peace-on-css?slide=62){target="_blank"}, просто немного иначе:
+Каждый компонент решает свою задачу и решает её хорошо: кнопка реагирует на нажатие, поле ввода – откликается на ошибки пользователя, а модальное окно – само определяет, на каком устройстве оно было открыто. Ответственность разделена? [Вполне](https://speakerdeck.com/didoo/let-there-be-peace-on-css?slide=62){target="_blank"}, просто немного иначе:
 
 ![Separation of concerns](/images/soc.png 'Разделение ответственности')
 
@@ -58,7 +58,7 @@ tags:
 
 ### JSX
 
-[React](https://reactjs.org/){target="_blank"} стал одной из первых библиотек (гусары, молчать!) принёсшей компоненты в народ. Концепция JSX - HTML код совмещённый с JavaScript - была [не новой](https://en.wikipedia.org/wiki/ECMAScript_for_XML){target="_blank"}, но создателям React удалось донести её в понятной форме массе веб-разработчиков. Естественно, мир им не ограничивается, просто в рамках данной статьи так удобнее.
+[React](https://reactjs.org/){target="_blank"} стал одной из первых библиотек (гусары, молчать!), принёсшей компоненты в народ. Концепция JSX - HTML код совмещённый с JavaScript - была [не новой](https://en.wikipedia.org/wiki/ECMAScript_for_XML){target="_blank"}, но создателям React удалось донести её в понятной форме массе веб-разработчиков. Естественно, мир им не ограничивается, просто в рамках данной статьи так удобнее.
 
 JSX по определению решает лишь задачу объединения структуры части документа с поведением этой самой части:
 
@@ -230,11 +230,10 @@ document.body.innerHTML = `
   <Block
     backgroundColor="#EEE"
     borderRadius={5}
-    height={64}
-    width={64}
-    marginRight={15}
+    height={320}
+    width={200}
     backgroundSize="contain"
-    backgroundImage="url(http://graph.facebook.com/justinbieber/picture?type=large)"
+    backgroundImage="url(https://i.ytimg.com/vi/j83eF9GHRcM/hq720.jpg)"
   />
   <Col fontFamily="sans-serif" fontSize={16} lineHeight="24px">
     <Block fontWeight={600}>Просто</Block>
@@ -275,15 +274,13 @@ const styles = {
 
 export function HelloRadiumButton() {
   return (
-    return (
-      <button
-        style={[
-          styles.base,
-          this.props.block && styles.block
-        ]}>
-        {this.props.children}
-      </button>
-    );
+    <button
+      style={[
+        styles.base,
+        this.props.block && styles.block
+      ]}>
+      {this.props.children}
+    </button>
   );
 }
 ```
