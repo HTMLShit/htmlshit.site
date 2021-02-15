@@ -18,3 +18,105 @@
     --ne-links-active-foreground: #d66a00;
   }
 }
+
+.theme {
+  position: relative;
+  display: inline-flex;
+}
+
+.theme input {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.theme .label {
+  cursor: pointer;
+  position: absolute;
+  z-index: 10;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.theme input[value='auto']:checked ~ .auto,
+.theme input[value='auto']:checked ~ .day {
+  display: none;
+}
+
+.theme input[value='auto']:checked ~ .night {
+  display: block;
+}
+
+.theme input[value='auto']:checked ~ .switch {
+  background-color: #cccccc;
+}
+
+.theme input[value='auto']:checked ~ .switch::before {
+  left: 18px;
+}
+
+.theme input[value='night']:checked ~ .auto,
+.theme input[value='night']:checked ~ .night {
+  display: none;
+}
+
+.theme input[value='night']:checked ~ .day {
+  display: block;
+}
+
+.theme input[value='night']:checked ~ .switch {
+  background-color: #4d4d4d;
+}
+
+.theme input[value='night']:checked ~ .switch::before {
+  content: '🌛';
+  left: 2px;
+}
+
+.theme input[value='day']:checked ~ .day,
+.theme input[value='day']:checked ~ .night {
+  display: none;
+}
+
+.theme input[value='day']:checked ~ .auto {
+  display: block;
+}
+
+.theme input[value='day']:checked ~ .switch {
+  background-color: #2196f3;
+}
+
+.theme input[value='day']:checked ~ .switch::before {
+  content: '🌞';
+  left: 34px;
+}
+
+.theme .switch {
+  display: block;
+  border: none;
+  width: 64px;
+  height: 32px;
+  border-radius: 999px;
+  position: relative;
+  transition: 0.2s;
+}
+
+.theme .switch::before {
+  content: '⏰';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  display: block;
+  width: 28px;
+  height: 28px;
+  background-color: #fff;
+  font-size: 18px;
+  text-align: center;
+  border-radius: 100%;
+  transition: 0.2s;
+}

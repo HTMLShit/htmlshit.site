@@ -45,6 +45,11 @@ footer {
   margin: var(--ne-vertical-leading, 1.5em) 0 0;
 }
 
+li small {
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
 .permalink {
   margin-left: 1rem;
 
