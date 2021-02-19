@@ -19,6 +19,10 @@
 
     <h1>{{ title }}</h1>
 
+    <article ne-prose>
+      {{ content | safe }}
+    </article>
+
     {% if tags.length %}
       <ul style="all: unset; display: flex; list-style: none; flex-wrap: wrap">
       {% for tag in tags %}
@@ -29,15 +33,10 @@
 
     <hr />
 
-    <article ne-prose>
-      {{ content | safe }}
-    </article>
-
-    <hr />
-
     {% set previousPost = collections.posts | getPreviousCollectionItem(page) %}
     {% set nextPost = collections.posts | getNextCollectionItem(page) %}
     {{ postNavigation(previousPost, nextPost) }}
+
     {% include "footer.njk" %}
   </main>
 {% endblock %}

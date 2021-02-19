@@ -1,16 +1,17 @@
 ---
-draft: true
-title: Styled Components и его друзья
-date: '2021-01-31'
+draft: false
+title: Введение в Styled Components
+date: '2021-02-18'
 tags:
   - css
   - cssinjs
   - react
   - styledcomponents
   - emotion
+  - linaria
 ---
 
-ПРОЧИТАТЬ https://mxstbr.blog/2016/11/styled-components-magic-explained/
+TODO: https://github.com/FormidableLabs/react-live
 
 Итак, [Styled Components](https://www.styled-components.com/). Буквально – стилизованные компоненты. Собственно, в этом вся суть и статью можно завершать.
 
@@ -29,7 +30,7 @@ const Title = styled.h1`
   font-size: 2rem;
 `;
 
-const Text= styled.p`
+const Text = styled.p`
   ${sharedText};
   font-size: 1rem;
 `;
@@ -48,28 +49,28 @@ const PinkText = styled(TextBase)`
 `;
 
 const Container = styled.div`
-   margin: ${({isLarge}) => isLarge ? '5rem' : '1rem'};
+  margin: ${({ isLarge }) => (isLarge ? '5rem' : '1rem')};
 `;
 
 const TextBase = styled.p`
-   font-size: 1rem;
-   text-align: center;
-   color: ${props => props.color};
+  font-size: 1rem;
+  text-align: center;
+  color: ${(props) => props.color};
 `;
 
-const MyComponent = function() {
+const MyComponent = function () {
   return (
     <Container isLarge>
       <TextBase color="#0000FF">I'm Blue</TextBase>
       <TextBase color="pink">I'm Pink</TextBase>
     </Container>
   );
-}
+};
 ```
 
 ## Поехали
 
-Давайте напишем простенький React-компонент, для упрощения процесса я буду использовать SCSS (*ведь его все любят*):
+Давайте напишем простенький React-компонент, для упрощения процесса я буду использовать SCSS (_ведь его все любят_):
 
 ```scss
 .hello {
@@ -86,11 +87,7 @@ const MyComponent = function() {
 
 ```jsx
 function HelloClassNameComponent() {
-  return (
-    <div className="hello">
-      Hello Class Name!
-    </div>
-  );
+  return <div className="hello">Hello Class Name!</div>;
 }
 ```
 
@@ -109,17 +106,13 @@ const Div = styled.div`
 `;
 
 function HelloStyledComponent() {
-  return (
-    <Div>
-      Hello Styled!
-    </Div>
-  );
+  return <Div>Hello Styled!</Div>;
 }
 ```
 
 <small>Сразу видна проблема с подсветкой кода, но это уже по моей вине: я пока не очень разобрался с настройками [Prism](https://prismjs.com/) в [Eleventy](https://www.11ty.dev/). Просто имейте это в виду.</small>
 
-Выглядит весьма похоже. Используя свежие фишки языка под названием [шаблонные строки](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/template_strings) и [теговые шаблоны](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/template_strings#%D1%82%D0%B5%D0%B3%D0%BE%D0%B2%D1%8B%D0%B5_%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD%D1%8B) Styled Components буквально позволяет писать привычный CSS прямо в JS-модулях и таким образом теперь ваш компонент целиком и полностью отвечает не только за свою структуру и визуальную логику, но и за внешнее оформление тоже.
+Выглядит весьма похоже. Используя свежие фишки JavaScript под названием [шаблонные строки](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/template_strings) и [теговые шаблоны](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/template_strings#%D1%82%D0%B5%D0%B3%D0%BE%D0%B2%D1%8B%D0%B5_%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD%D1%8B) Styled Components буквально позволяет писать привычный CSS прямо в JS-модулях и таким образом теперь ваш компонент целиком и полностью отвечает не только за свою структуру и визуальную логику, но и за внешнее оформление тоже.
 
 И привычный и такой любимый родительский селектор (&, амперсанд) имеется.
 
@@ -140,15 +133,11 @@ const Div = styled.div`
 `;
 
 function HelloStyledComponent() {
-  return (
-    <Div color="green">
-      Hello Styled!
-    </Div>
-  );
+  return <Div color="green">Hello Styled!</Div>;
 }
 ```
 
-Что мы сделали? Мы передали цвет текста через свойства компонента (properties, props... *пробросили через пропсы*, в общем). Ничего не передаём – получаем красный, вот так просто. Теперь можно поступить вот так:
+Что мы сделали? Мы передали цвет текста через свойства компонента (properties, props... _пробросили через пропсы_, в общем). Ничего не передаём – получаем красный, вот так просто. Теперь можно поступить вот так:
 
 ```jsx
 const colors = ['red', 'green', 'blue'];
@@ -156,7 +145,9 @@ const colors = ['red', 'green', 'blue'];
 function HelloPropsComponent() {
   return (
     <article>
-      {colors.map(color => <Div color={color}>Hello Styled!</Div>)}
+      {colors.map((color) => (
+        <Div color={color}>Hello Styled!</Div>
+      ))}
     </article>
   );
 }
@@ -197,19 +188,15 @@ const colors = ['red', 'green', 'blue'];
 function HelloClassComponent() {
   return (
     <article>
-      {colors.map(color => {
-        return (
-          <div className={`hello hello--${color}`}>
-            Hello Class Name!
-          </div>
-        );
+      {colors.map((color) => {
+        return <div className={`hello hello--${color}`}>Hello Class Name!</div>;
       })}
     </article>
   );
 }
 ```
 
-Как-то не очень выразительно. Да, можно попробовать пользовательские свойства CSS (*переменные*, Custom Properties), будет гораздо гибче. Но при работе "в лоб" всё ещё достаточно неудобно.
+Как-то не очень выразительно. Да, можно попробовать пользовательские свойства CSS (_переменные_, Custom Properties), будет гораздо гибче. Но при работе «в лоб» всё ещё достаточно неудобно.
 
 Задаём свойство:
 
@@ -233,7 +220,7 @@ function HelloVarComponent() {
   return (
     <article>
       {colors.map((color) => {
-        const colorStyle = {'--color': color};
+        const colorStyle = { '--color': color };
 
         return (
           <div className="hello" style={colorStyle}>
@@ -252,7 +239,7 @@ function HelloVarComponent() {
 
 ### Переиспользование и css``
 
-Ладно одно свойство, а если у вас их с десяток? А если вам поддержка темизации нужна? А если это свойство должно полностью преобразить компонент? Разным ситуациям – разный внешний вид по переданному одному лишь свойству. Введём ещё одну функцию, css.
+Ладно одно свойство, а если у вас их с десяток? А если вам поддержка темизации нужна? А если это свойство должно полностью преобразить компонент? Разным ситуациям – разный внешний вид по переданному одному лишь параметру. Введём ещё одну функцию, css.
 
 Название говорит само за себя:
 
@@ -264,7 +251,7 @@ const flexStyles = css`
   flex-direction: column;
   align-items: space-around;
   justify-content: center;
-  color: ${({color}) => color || 'red'}
+  color: ${({ color }) => color || 'red'};
 `;
 
 const blockStyles = css`
@@ -272,7 +259,7 @@ const blockStyles = css`
 `;
 
 const Div = styled.div`
-  ${({isAlt}) => {
+  ${({ isAlt }) => {
     isAlt ? blockStyles : flexStyles;
   }}
 `;
@@ -299,13 +286,13 @@ const Title = styled.h1`
   font-size: 2rem;
 `;
 
-const Text= styled.p`
+const Text = styled.p`
   ${sharedStyles};
   font-size: 1rem;
 `;
 ```
 
-Конструкция, кстати, называется теговым шаблоном. Я писал выше, что библиотека Styled Components на них основана. Сама директива styled – фабрика этих самых теговых шаблонов и это первая подсказка к самой крутой фишке библиотеки.
+Конструкция, напомню, называется теговым шаблоном. Я писал выше, что библиотека Styled Components на них основана. Сама директива styled – фабрика этих самых теговых шаблонов и это первая подсказка к самой крутой фишке библиотеки.
 
 ### Адаптивная вёрстка и media``
 
@@ -321,8 +308,8 @@ const size = {
   tablet: '768px',
   laptop: '1024px',
   laptopL: '1440px',
-  desktop: '2560px'
-}
+  desktop: '2560px',
+};
 
 const device = {
   mobileS: `(min-width: ${size.mobileS})`,
@@ -332,7 +319,7 @@ const device = {
   laptop: `(min-width: ${size.laptop})`,
   laptopL: `(min-width: ${size.laptopL})`,
   desktop: `(min-width: ${size.desktop})`,
-  desktopL: `(min-width: ${size.desktop})`
+  desktopL: `(min-width: ${size.desktop})`,
 };
 
 const Div = styled.div`
@@ -349,11 +336,7 @@ const Div = styled.div`
 `;
 
 function HelloMediaComponent() {
-  return (
-    <Div>
-      Hello Media!
-    </Div>
-  );
+  return <Div>Hello Media!</Div>;
 }
 ```
 
@@ -420,13 +403,13 @@ import styled from 'styled-components';
 import Icon from '@/ui/Icon';
 
 const ButtonIcon = styled(Icon)`
-    display: inline-block;
-    width: 12px;
-    height: 12px;
+  display: inline-block;
+  width: 12px;
+  height: 12px;
 `;
 ```
 
-То есть мы просто передаём в styled ваш компонент в качестве аргумента и получаем теговый шаблон, который генерирует новый класс на основе уже существующего класса, принадлежащего стилизуемому элементу, и новых передаваемых стилей. *Магическим* образом рождается новый компонент. Мне кажется, на этом месте у самых внимательных должна щёлкнуть в голове весьма очевидная идея: «Раз Styled Components заведует классами, можно ли подмешать их к обычным компонентам?».
+То есть мы просто передаём в styled ваш компонент в качестве аргумента и получаем теговый шаблон, который генерирует новый класс на основе уже существующего класса, принадлежащего стилизуемому элементу, и новых передаваемых стилей. _Магическим_ образом рождается новый компонент. Мне кажется, на этом месте у самых внимательных должна щёлкнуть в голове весьма очевидная идея: «Раз Styled Components заведует классами, можно ли подмешать их к обычным компонентам?».
 
 И ответ – да!
 
@@ -438,9 +421,7 @@ const ButtonIcon = styled(Icon)`
 import styled from 'styled-components';
 
 const Link = ({ className, children }) => (
-  <a className={className}>
-    {children}
-  </a>
+  <a className={className}>{children}</a>
 );
 
 const StyledLink = styled(Link)`
@@ -453,7 +434,7 @@ render(
     <Link>Unstyled, boring Link</Link>
     <br />
     <StyledLink>Styled, exciting Link</StyledLink>
-  </div>
+  </div>,
 );
 ```
 
@@ -465,3 +446,4 @@ render(
 - <https://medium.com/swlh/creating-react-styled-components-with-dynamic-tags-and-props-ef965c839e64>
 - <https://www.reddit.com/r/reactjs/comments/l4o5k5/the_styledcomponents_happy_path/>
 - <https://jsramblings.com/how-to-use-media-queries-with-styled-components/>
+- <https://mxstbr.blog/2016/11/styled-components-magic-explained/>
