@@ -27,6 +27,8 @@ JSX? JSX!
 
 Рантайм
 
+https://medium.com/@adostes/you-dont-need-react-to-use-jsx-b78dd2a95c27
+
 Поддержка JS-выражений и массивов
 
 Ты втираешь нам какую-то дичь
