@@ -5,7 +5,7 @@ module.exports = {
   name: '@htmlshit',
   shortDesc:
     'Будни верстальщика: канал о вёрстке, фронтенде и веб-разработке вообще',
-  url: 'https://t.me/htmlshit',
+  url: 'https://htmlshit.site',
   lang: 'ru',
   /**
    * Socials and monetisation

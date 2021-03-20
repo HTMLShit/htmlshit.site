@@ -462,7 +462,7 @@ export default function App() {
 
 ### Магия
 
-Напоследок немного обещанной магии. Возьмём популярный фреймворк [Material UI](https://material-ui.com/) и обратим его на свою сторону. Компоненты MUI принимают классы? Значит, принимают и правила SC:
+Напоследок немного обещанной магии. Возьмём популярный фреймворк [Material UI](https://material-ui.com/) и [обратим его на свою сторону](https://codesandbox.io/s/broken-wave-24je9). Компоненты MUI принимают классы? Значит, принимают и правила SC.
 
 <iframe src="https://codesandbox.io/embed/broken-wave-24je9?fontsize=14&hidenavigation=1&moduleview=1&theme=dark"
      style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
