@@ -10,10 +10,6 @@ tags:
   - linaria
 ---
 
-<!-- TODO: https://github.com/FormidableLabs/react-live -->
-<!-- TODO: https://javascript.plainenglish.io/youre-missing-a-trick-with-your-styled-components-in-react-e3dfcd586f75 -->
-<!-- TODO: начать с установки, для быстрого теста -->
-
 Итак, [Styled Components](https://www.styled-components.com/). Буквально – стилизованные компоненты. Собственно, в этом вся суть и статью можно завершать.
 
 Шучу. Продолжаем.
@@ -121,7 +117,7 @@ function HelloStyledComponent() {
 
 Установка и настройка Styled Components будет описана в следующей статье цикла, поскольку нюансов и фишек слишком много. Здесь я познакомлю вас с синтаксисом и основными приёмами работы. Чтобы было проще стартовать, я подготовил песочницу на [CodeSandbox](https://codesandbox.io/s/competent-noether-21coi?file=/src/App.js), в рамках которой можно просто запускать код из статьи. Да, я ленивый: остальные примеры будут даны просто текстом.
 
-<iframe src="https://codesandbox.io/embed/competent-noether-21coi?fontsize=14&hidenavigation=1&theme=dark"
+<iframe src="https://codesandbox.io/embed/competent-noether-21coi?fontsize=14&hidenavigation=1&moduleview=1&theme=dark"
      style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
      title="competent-noether-21coi"
      allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
@@ -468,7 +464,7 @@ export default function App() {
 
 Напоследок немного обещанной магии. Возьмём популярный фреймворк [Material UI](https://material-ui.com/) и обратим его на свою сторону. Компоненты MUI принимают классы? Значит, принимают и правила SC:
 
-<iframe src="https://codesandbox.io/embed/broken-wave-24je9?fontsize=14&hidenavigation=1&theme=dark"
+<iframe src="https://codesandbox.io/embed/broken-wave-24je9?fontsize=14&hidenavigation=1&moduleview=1&theme=dark"
      style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
      title="broken-wave-24je9"
      allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
