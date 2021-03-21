@@ -3,6 +3,7 @@ const contentParser = require('./utils/transforms/contentParser.js');
 const htmlDate = require('./utils/filters/htmlDate.js');
 const rssPlugin = require('@11ty/eleventy-plugin-rss');
 const date = require('./utils/filters/date.js');
+const codepenEmbed = require('@kevingimbel/eleventy-plugin-codepen');
 
 /**
  * Define Eleventy custom paths
@@ -58,6 +59,7 @@ module.exports = function (eleventyConfig) {
    */
   eleventyConfig.addPlugin(rssPlugin);
   eleventyConfig.addPlugin(syntaxHighlightPlugin);
+  eleventyConfig.addPlugin(codepenEmbed);
 
   const markdownIt = require('markdown-it');
   const markdownItAttrs = require('markdown-it-attrs');

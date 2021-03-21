@@ -117,12 +117,7 @@ function HelloStyledComponent() {
 
 Установка и настройка Styled Components будет описана в следующей статье цикла, поскольку нюансов и фишек слишком много. Здесь я познакомлю вас с синтаксисом и основными приёмами работы. Чтобы было проще стартовать, я подготовил песочницу на [CodePen](https://codepen.io/alinaki/pen/wvoVVBg), в рамках которой можно просто запускать код из статьи. Да, я ленивый: остальные примеры будут даны просто текстом.
 
-<p class="codepen" data-height="265" data-theme-id="dark" data-default-tab="js,result" data-user="alinaki" data-slug-hash="wvoVVBg" data-preview="true" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Styled Components demo">
-  <span>See the Pen <a href="https://codepen.io/alinaki/pen/wvoVVBg">
-  Styled Components demo</a> by Alinaki (<a href="https://codepen.io/alinaki">@alinaki</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
+{% codepen https://codepen.io/alinaki/pen/wvoVVBg %}
 
 ### Прокидываем props'ы
 
@@ -464,12 +459,7 @@ export default function App() {
 
 Напоследок немного обещанной магии. Возьмём популярный фреймворк [Material UI](https://material-ui.com/) и [обратим его на свою сторону](https://codepen.io/alinaki/pen/xxRvvZe). Компоненты MUI принимают классы? Значит, принимают и правила SC.
 
-<p class="codepen" data-height="265" data-theme-id="dark" data-default-tab="js,result" data-user="alinaki" data-slug-hash="xxRvvZe" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Styled Components MUI Demo">
-  <span>See the Pen <a href="https://codepen.io/alinaki/pen/xxRvvZe">
-  Styled Components MUI Demo</a> by Alinaki (<a href="https://codepen.io/alinaki">@alinaki</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
+{% codepen https://codepen.io/alinaki/pen/xxRvvZe %}
 
 Есть только одна хитрая проблема. Вы же не забыли, что правила CSS применяются по-порядку? Нам нужно быть уверенными, что стили SC загрузятся __после__ стилей JSS (который применяется в MUI по-умолчанию). Вот для этого и нужен провайдер контекста стилей `StylesProvider`. Он гарантирует, что правила JSS будут загружены первыми. А SC, соответственно, уже после них. Ну ещё есть хак с &&. Догадайтесь уже сами, что он сделает.
 
