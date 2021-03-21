@@ -40,6 +40,15 @@ nav {
   }
 }
 
+article a:only-child {
+  display: inline-block;
+  vertical-align: middle;
+  white-space: nowrap;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 footer {
   text-align: right;
   margin: var(--ne-vertical-leading, 1.5em) 0 0;
