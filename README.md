@@ -1,3 +1,4 @@
+[![Node CI](https://github.com/HTMLShit/htmlshit.site/actions/workflows/nodeCI.yml/badge.svg)](https://github.com/HTMLShit/htmlshit.site/actions)
 ![XITY Starter](https://repository-images.githubusercontent.com/234711727/fbefa980-45e0-11ea-8f4e-1250f14a82a5)
 
 A blog-ready 11ty starter based on PostCSS and Snowpack, with a RSS feed and Native Elements.
