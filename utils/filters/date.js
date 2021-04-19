@@ -1,5 +1,5 @@
-module.exports = function (value) {
-  const dateObject = new Date(value)
+module.exports = function date(value) {
+  const dateObject = new Date(value);
 
   const months = [
     'Января',
@@ -14,9 +14,9 @@ module.exports = function (value) {
     'Октября',
     'Ноября',
     'Декабря',
-  ]
+  ];
 
   return `${dateObject.getDate()} ${
     months[dateObject.getMonth()]
-  } ${dateObject.getFullYear()}`
-}
+  } ${dateObject.getFullYear()}`;
+};

@@ -1,1 +1,1 @@
-module.exports = require('../xity.config.js')
+module.exports = require('../xity.config.js');

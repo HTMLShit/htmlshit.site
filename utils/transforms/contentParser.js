@@ -1,4 +1,5 @@
 const jsdom = require('@tbranyen/jsdom');
+
 const { JSDOM } = jsdom;
 const slugify = require('slugify');
 const eleventyConfig = require('../../xity.config.js');
@@ -7,13 +8,13 @@ function setClass(element, list) {
   list.map((item) => element.classList.add(item));
 }
 
-module.exports = function (value, outputPath) {
+module.exports = function parse(value, outputPath) {
   if (outputPath.endsWith('.html')) {
     /**
      * Create the document model
      */
     const DOM = new JSDOM(value);
-    const document = DOM.window.document;
+    const { document } = DOM.window;
 
     /**
      * Get all the images from the post
@@ -109,7 +110,7 @@ module.exports = function (value, outputPath) {
      * inside a div to apply a custom style
      */
     const codeSnippets = [
-      ...document.querySelectorAll('pre[class^="language"'),
+      ...document.querySelectorAll('pre[class^="language"]'),
     ];
     if (codeSnippets.length) {
       codeSnippets.forEach((embed) => {
@@ -134,12 +135,9 @@ module.exports = function (value, outputPath) {
         const externalLink = document.createElement('a');
         if (link.hasAttributes()) {
           const linkAttributes = link.attributes;
-          for (let i = linkAttributes.length; i--; ) {
-            externalLink.setAttribute(
-              linkAttributes[i].name,
-              linkAttributes[i].value,
-            );
-          }
+          linkAttributes.forEach((attribute) => {
+            externalLink.setAttribute(attribute.name, attribute.value);
+          });
         }
         /**
          * If the link starts with http or https
@@ -168,7 +166,7 @@ module.exports = function (value, outputPath) {
       });
     }
 
-    return '<!DOCTYPE html>\r\n' + document.documentElement.outerHTML;
+    return `<!DOCTYPE html>\r\n${document.documentElement.outerHTML}`;
   }
   return value;
 };

@@ -4,7 +4,7 @@ title: Будни верстальщика
 templateEngineOverride: njk,md
 ---
 
-[Telegram-канал](https://t.me/htmlshit){target="_blank"} про HTML, CSS и фронтенд вообще. Начинался как набор забавных и странных ситуаций из мира аутсорса. Шпаргалки, ссылки, разбор багов и авторские статьи. 
+[Telegram-канал](https://t.me/htmlshit){target="\_blank"} про HTML, CSS и фронтенд вообще. Начинался как набор забавных и странных ситуаций из мира аутсорса. Шпаргалки, ссылки, разбор багов и авторские статьи.
 
 ---
 
@@ -12,8 +12,9 @@ templateEngineOverride: njk,md
 
 {% set postList = collections.posts | reverse %}
 {% for item in postList.slice(0, 2) %}
+
 - [{{ item.data.title }}]({{ item.url }})
-{% endfor %}
+  {% endfor %}
 
 ---
 

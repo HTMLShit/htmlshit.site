@@ -50,7 +50,7 @@ const wobbleKey = keyframes`
   }
 `;
 
-const wobbleAnimation = props => css`
+const wobbleAnimation = (props) => css`
   ${wobbleKey} ${props.animationLength} ease-in-out infinite;
 `;
 
@@ -59,11 +59,7 @@ const WobbledDiv = styled.div`
 `;
 
 function HelloAnimatedComponent() {
-  return (
-    <WobbleDiv animationLength="0.8s">
-      Hello Wobble!
-    </WobbleDiv>
-  );
+  return <WobbleDiv animationLength="0.8s">Hello Wobble!</WobbleDiv>;
 }
 ```
 

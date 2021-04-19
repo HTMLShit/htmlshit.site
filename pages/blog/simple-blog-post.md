@@ -36,7 +36,7 @@ const MyComponent = (props) => (
   <Fragment>
     <p>Hello {props.name}</p>
   </Fragment>
-)
+);
 ```
 
 ... and here are some CSS code with a line highlight:
