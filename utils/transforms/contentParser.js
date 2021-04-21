@@ -135,7 +135,7 @@ module.exports = function parse(value, outputPath) {
         const externalLink = document.createElement('a');
         if (link.hasAttributes()) {
           const linkAttributes = link.attributes;
-          linkAttributes.forEach((attribute) => {
+          [...linkAttributes].forEach((attribute) => {
             externalLink.setAttribute(attribute.name, attribute.value);
           });
         }

@@ -1,3 +1,4 @@
 node_modules/
-_output
+_output/
 postcss.config.js
+build/
