@@ -52,6 +52,7 @@
     "eslint-plugin-functional": "^3.2.1",
     "eslint-plugin-import": "^2.22.1",
     "is-svg": "^4.2.2",
-    "slugify": "^1.5.1"
+    "slugify": "^1.5.1",
+    "xmlhttprequest-ssl": "1.6.2"
   }
 }
