@@ -165,7 +165,6 @@ module.exports = function parse(value, outputPath) {
         link.replaceWith(externalLink.cloneNode(true));
       });
     }
-
     return `<!DOCTYPE html>\r\n${document.documentElement.outerHTML}`;
   }
   return value;
