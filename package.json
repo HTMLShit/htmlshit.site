@@ -32,7 +32,6 @@
     "@snowpack/plugin-run-script": "^2.3.0",
     "cssnano": "^5.0.2",
     "cssnano-preset-advanced": "^5.0.1",
-    "husky": "^6.0.0",
     "markdown-it-attrs": "^4.0.0",
     "postcss": "^8.2.13",
     "postcss-cli": "^8.3.1",
