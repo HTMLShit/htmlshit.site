@@ -22,8 +22,6 @@ module.exports = {
   optimize: {
     /* https://www.snowpack.dev/guides/optimize-and-bundle#option-1%3A-built-in-optimizations */
     preload: true,
-    splitting: true,
-    treeshake: true,
     minify: true,
     target: 'es2018',
   },

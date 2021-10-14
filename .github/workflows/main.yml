@@ -21,9 +21,10 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: Install
         run: yarn install
+      - name: Start
+        run: yarn start
+        timeout-minutes: 0.2
       - name: Linter
         run: npx eslint .
-      - name: Start #required to create _output folder
-        run: yarn start
       - name: Build
         run: yarn build
