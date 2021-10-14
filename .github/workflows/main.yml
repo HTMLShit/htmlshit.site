@@ -24,6 +24,7 @@ jobs:
       - name: Start
         run: yarn start
         timeout-minutes: 1
+        continue-on-error: true
       - name: Linter
         run: npx eslint .
       - name: Build
