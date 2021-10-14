@@ -15,8 +15,7 @@
     "test": "echo \"This template does not include a test runner by default.\" && exit 1",
     "lint": "prettier --write .",
     "update:deps": "yarn upgrade-interactive --latest && yarn upgrade",
-    "update:cssdb": "npx browserslist@latest --update-db",
-    "prepare": "husky install"
+    "update:cssdb": "npx browserslist@latest --update-db"
   },
   "browserslist": [
     "last 1 Chrome versions",
