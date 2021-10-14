@@ -23,5 +23,7 @@ jobs:
         run: yarn install
       - name: Linter
         run: npx eslint .
+      - name: Start #required to create _output folder
+        run: yarn start
       - name: Build
         run: yarn build
